@@ -1,8 +1,7 @@
 import { useQuery, useQueries } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import type { Pokemon } from '@features/pokemon-list/types/pokemon';
-import { pokemonApi } from '@features/pokemon-list/api/pokemonApi';
-import { pokemonDetailsApi } from '@api/pokemonDetailsApi';
+import { pokemonApi } from '@api/pokemonApi';
 import { queryKeys } from '@/queryKeys';
 
 export interface PokemonWithTypes extends Pokemon {
@@ -33,7 +32,7 @@ export function usePokemonList(limit = 20, offset = 0): UsePokemonListResult {
   const detailQueries = useQueries({
     queries: pokemonList.map(pokemon => ({
       queryKey: queryKeys.pokemonDetails(pokemon.id),
-      queryFn: () => pokemonDetailsApi.getPokemonById(pokemon.id),
+      queryFn: () => pokemonApi.getPokemonById(pokemon.id),
       enabled: !isLoading && pokemonList.length > 0,
     })),
   });

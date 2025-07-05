@@ -1,8 +1,12 @@
-const BASE_URL = 'https://pokeapi.co/api/v2';
+export class ApiClient {
+  private baseUrl: string;
 
-export const apiClient = {
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl;
+  }
+
   async get<T>(url: string): Promise<T> {
-    const fullUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`;
+    const fullUrl = url.startsWith('http') ? url : `${this.baseUrl}${url}`;
     const response = await fetch(fullUrl);
 
     if (!response.ok) {
@@ -10,5 +14,7 @@ export const apiClient = {
     }
 
     return response.json();
-  },
-};
+  }
+}
+
+export const apiClient = new ApiClient('https://pokeapi.co/api/v2');

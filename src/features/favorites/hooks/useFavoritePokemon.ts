@@ -1,6 +1,6 @@
 import { useQueries } from '@tanstack/react-query';
 import { useFavoritesStore } from '@/store/favourites';
-import { pokemonDetailsApi } from '@api/pokemonDetailsApi';
+import { pokemonApi } from '@api/pokemonApi';
 import { queryKeys } from '@/queryKeys';
 import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
 import type { PokemonDetails } from '@/types/pokemonDetails';
@@ -18,7 +18,7 @@ export function useFavoritePokemon(): UseFavoritePokemonResult {
   const queries = useQueries({
     queries: favoriteIds.map(id => ({
       queryKey: queryKeys.pokemonDetails(id),
-      queryFn: () => pokemonDetailsApi.getPokemonById(id),
+      queryFn: () => pokemonApi.getPokemonById(id),
       enabled: favoriteIds.length > 0,
     })),
   });
