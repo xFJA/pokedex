@@ -1,5 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { usePokemonDetails } from '@features/pokemon-details/hooks/usePokemonDetails';
+import { Stats } from '@features/pokemon-details/components/Stats';
+import { TypePill } from '@components/TypePill';
 
 export function PokemonDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -80,15 +82,13 @@ export function PokemonDetailPage() {
                 <h2 className="text-xl font-semibold mb-2">Types</h2>
                 <div className="flex gap-2">
                   {pokemon.types.map(typeInfo => (
-                    <span
-                      key={typeInfo.type.name}
-                      className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
-                    >
-                      {typeInfo.type.name}
-                    </span>
+                    <TypePill key={typeInfo.type.name} type={typeInfo.type.name} />
                   ))}
                 </div>
               </div>
+
+              {/* Stats component */}
+              <Stats pokemon={pokemon} />
             </div>
           </div>
         </div>
