@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useEffect, useState } from 'react';
 
 const MAX_STAT = 255;
 
@@ -17,10 +18,17 @@ const STAT_CONFIG: Record<string, { label: string; color: string }> = {
 };
 
 export const StatBar: FC<StatBarProps> = ({ name, value }) => {
+  const [width, setWidth] = useState(0);
+
   const percentage = Math.min(Math.round((value / MAX_STAT) * 100), 100);
   const statConfig = STAT_CONFIG[name] || { label: name, color: 'bg-gray-400' };
   const displayName = statConfig.label;
   const barColor = statConfig.color;
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setWidth(percentage), 50);
+    return () => clearTimeout(timeout);
+  }, [percentage]);
 
   return (
     <div className="mb-3">
@@ -29,8 +37,8 @@ export const StatBar: FC<StatBarProps> = ({ name, value }) => {
       </div>
       <div className="relative w-full bg-gray-200 rounded-full h-6 flex items-center">
         <div
-          className={`absolute left-0 top-0 h-6 rounded-full ${barColor} transition-all`}
-          style={{ width: `${percentage}%` }}
+          className={`absolute left-0 top-0 h-6 rounded-full ${barColor} transition-[width] duration-1500 ease-in-out`}
+          style={{ width: `${width}%` }}
         ></div>
         <span className="absolute right-3 text-xs font-semibold text-black">
           {value}/{MAX_STAT}
