@@ -12,10 +12,11 @@ export const PokemonListResponseSchema = z.object({
   count: z.number(),
   next: z.string().url().nullable(),
   previous: z.string().url().nullable(),
-  results: z.array(z.object({
-    name: z.string(),
-    url: z.string().url(),
-  })),
+  results: z.array(
+    z.object({
+      name: z.string(),
+      url: z.string().url(),
+    }),
+  ),
 });
 export type PokemonListResponse = z.infer<typeof PokemonListResponseSchema>;
-

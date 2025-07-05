@@ -18,7 +18,8 @@ export function usePokemonList(initialLimit = 20): UsePokemonListResult {
     setIsLoading(true);
     setError(null);
 
-    pokemonApi.getPokemonList(initialLimit, 0)
+    pokemonApi
+      .getPokemonList(initialLimit, 0)
       .then(response => {
         if (isMounted) {
           setPokemonList(pokemonApi.transformPokemonData(response, 0));
@@ -31,7 +32,9 @@ export function usePokemonList(initialLimit = 20): UsePokemonListResult {
         if (isMounted) setIsLoading(false);
       });
 
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, [initialLimit]);
 
   return {
@@ -40,4 +43,3 @@ export function usePokemonList(initialLimit = 20): UsePokemonListResult {
     error,
   };
 }
-
