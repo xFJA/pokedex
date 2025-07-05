@@ -49,7 +49,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
         <Favourite
           fill={isFavorite(pokemon.id) ? 'currentColor' : 'none'}
           stroke="currentColor"
-          className={`w-6 h-6 ${isFavorite(pokemon.id) ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'}`}
+          className={`w-6 h-6 ${isFavorite(pokemon.id) ? 'text-red-500' : 'text-gray-400 hover:text-red-500'}`}
         />
       </button>
       <div className="p-4 bg-gray-100">

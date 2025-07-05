@@ -1,5 +1,6 @@
 import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { routes } from '@routes/index';
+import { Layout } from '@components/Layout';
 import './App.css';
 
 function AppRoutes() {
@@ -9,7 +10,9 @@ function AppRoutes() {
 function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <Layout>
+        <AppRoutes />
+      </Layout>
     </BrowserRouter>
   );
 }

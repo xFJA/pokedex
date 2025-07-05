@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { pokemonDetailsApi } from '@api/pokemonDetailsApi';
+import { pokemonApi } from '@api/pokemonApi';
 import { queryKeys } from '@/queryKeys';
 import type { PokemonDetails } from '@/types/pokemonDetails';
 
@@ -12,7 +12,7 @@ interface UsePokemonDetailsResult {
 export function usePokemonDetails(id: string | number): UsePokemonDetailsResult {
   const { data, isLoading, error } = useQuery({
     queryKey: queryKeys.pokemonDetails(id),
-    queryFn: () => pokemonDetailsApi.getPokemonById(id),
+    queryFn: () => pokemonApi.getPokemonById(id),
     enabled: !!id,
   });
 
