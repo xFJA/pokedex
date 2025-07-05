@@ -1,4 +1,4 @@
-import { apiClient } from '../../../core/api/apiClient';
+import { apiClient } from './apiClient';
 import type { PokemonDetails } from '../types/pokemonDetails';
 
 export const pokemonDetailsApi = {

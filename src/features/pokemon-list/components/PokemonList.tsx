@@ -1,9 +1,10 @@
 import { PokemonCard } from './PokemonCard';
-import type { Pokemon } from '../types/pokemon';
+import type { PokemonWithTypes } from '../hooks/usePokemonList';
 
 interface PokemonListProps {
-  pokemonList: Pokemon[];
+  pokemonList: PokemonWithTypes[];
   isLoading: boolean;
+  isTypesLoading?: boolean;
 }
 
 export function PokemonList({ pokemonList, isLoading }: PokemonListProps) {
