@@ -1,9 +1,9 @@
 import { useQuery, useQueries } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import type { Pokemon } from '../types/pokemon';
-import { pokemonApi } from '../api/pokemonApi';
-import { pokemonDetailsApi } from '../../../api/pokemonDetailsApi';
-import { queryKeys } from '../../../queryKeys';
+import type { Pokemon } from '@features/pokemon-list/types/pokemon';
+import { pokemonApi } from '@features/pokemon-list/api/pokemonApi';
+import { pokemonDetailsApi } from '@api/pokemonDetailsApi';
+import { queryKeys } from '@/queryKeys';
 
 export interface PokemonWithTypes extends Pokemon {
   types: {

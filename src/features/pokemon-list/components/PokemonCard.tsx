@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { PokemonWithTypes } from '../hooks/usePokemonList';
-import { TypePill } from '../../../components/TypePill';
+import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
+import { TypePill } from '@components/TypePill';
 
 interface PokemonCardProps {
   pokemon: PokemonWithTypes;

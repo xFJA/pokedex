@@ -1,5 +1,5 @@
-import { apiClient } from '../../../api/apiClient';
-import type { Pokemon, PokemonListResponse } from '../types/pokemon';
+import { apiClient } from '@api/apiClient';
+import type { Pokemon, PokemonListResponse } from '@features/pokemon-list/types/pokemon';
 
 export const pokemonApi = {
   async getPokemonList(

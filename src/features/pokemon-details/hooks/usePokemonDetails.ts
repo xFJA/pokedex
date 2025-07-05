@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { pokemonDetailsApi } from '../../../api/pokemonDetailsApi';
-import { queryKeys } from '../../../queryKeys';
-import type { PokemonDetails } from '../../../types/pokemonDetails';
+import { pokemonDetailsApi } from '@api/pokemonDetailsApi';
+import { queryKeys } from '@/queryKeys';
+import type { PokemonDetails } from '@/types/pokemonDetails';
 
 interface UsePokemonDetailsResult {
   pokemon: PokemonDetails | null;

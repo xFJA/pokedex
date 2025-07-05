@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { usePokemonDetails } from '../features/pokemon-details/hooks/usePokemonDetails';
+import { usePokemonDetails } from '@features/pokemon-details/hooks/usePokemonDetails';
 
 export function PokemonDetailPage() {
   const { id } = useParams<{ id: string }>();

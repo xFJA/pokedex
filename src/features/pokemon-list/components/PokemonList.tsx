@@ -1,5 +1,5 @@
 import { PokemonCard } from './PokemonCard';
-import type { PokemonWithTypes } from '../hooks/usePokemonList';
+import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
 
 interface PokemonListProps {
   pokemonList: PokemonWithTypes[];

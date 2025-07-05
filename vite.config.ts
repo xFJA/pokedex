@@ -12,6 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
       '@features': path.resolve(__dirname, './src/features'),
       '@core': path.resolve(__dirname, './src/core'),
       '@shared': path.resolve(__dirname, './src/shared'),
@@ -21,6 +22,8 @@ export default defineConfig({
       '@config': path.resolve(__dirname, './src/config'),
       '@assets': path.resolve(__dirname, './src/assets'),
       '@types': path.resolve(__dirname, './src/types'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@routes': path.resolve(__dirname, './src/routes'),
     },
   },
   server: {

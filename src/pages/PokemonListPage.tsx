@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { PokemonList } from '../features/pokemon-list/components/PokemonList';
-import { usePokemonList } from '../features/pokemon-list/hooks/usePokemonList';
-import { usePagination } from '../hooks/usePagination';
-import Pagination from '../components/Pagination';
+import { PokemonList } from '@features/pokemon-list/components/PokemonList';
+import { usePokemonList } from '@features/pokemon-list/hooks/usePokemonList';
+import { usePagination } from '@hooks/usePagination';
+import Pagination from '@components/Pagination';
 
 const PAGE_SIZE = 20;
 const SIBLING_COUNT = 1;

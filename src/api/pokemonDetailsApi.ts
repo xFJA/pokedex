@@ -1,5 +1,5 @@
-import { apiClient } from './apiClient';
-import type { PokemonDetails } from '../types/pokemonDetails';
+import { apiClient } from '@api/apiClient';
+import type { PokemonDetails } from '@/types/pokemonDetails';
 
 export const pokemonDetailsApi = {
   async getPokemonById(id: string | number): Promise<PokemonDetails> {
