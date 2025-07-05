@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { usePokemonDetails } from '@features/pokemon-details/hooks/usePokemonDetails';
 import { Stats } from '@features/pokemon-details/components/Stats';
 import { TypePill } from '@components/TypePill';
+import { MovesList } from '@features/pokemon-details/components/MovesList';
 
 export function PokemonDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -86,8 +87,7 @@ export function PokemonDetailPage() {
                   ))}
                 </div>
               </div>
-
-              {/* Stats component */}
+              <MovesList moves={pokemon.moves} />
               <Stats pokemon={pokemon} />
             </div>
           </div>
