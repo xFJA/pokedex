@@ -1,8 +1,26 @@
+import { useState } from 'react';
 import { PokemonList } from '../features/pokemon-list/components/PokemonList';
 import { usePokemonList } from '../features/pokemon-list/hooks/usePokemonList';
+import { usePagination } from '../hooks/usePagination';
+import Pagination from '../components/Pagination';
+
+const PAGE_SIZE = 20;
+const SIBLING_COUNT = 1;
 
 export function PokemonListPage() {
-  const { pokemonList, isLoading, error } = usePokemonList(20);
+  const [currentPage, setCurrentPage] = useState(1);
+  const offset = (currentPage - 1) * PAGE_SIZE;
+
+  const { pokemonList, total, isLoading, error } = usePokemonList(PAGE_SIZE, offset);
+
+  const { totalPages } = usePagination({
+    totalCount: total,
+    pageSize: PAGE_SIZE,
+    currentPage,
+    siblingCount: SIBLING_COUNT,
+  });
+
+  const handlePageChange = (page: number) => setCurrentPage(page);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -15,6 +33,13 @@ export function PokemonListPage() {
             </button>
           </div>
         )}
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          siblingCount={SIBLING_COUNT}
+        />
 
         <PokemonList pokemonList={pokemonList} isLoading={isLoading} />
       </main>

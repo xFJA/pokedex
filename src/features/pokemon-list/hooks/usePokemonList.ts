@@ -4,12 +4,14 @@ import { pokemonApi } from '../api/pokemonApi';
 
 interface UsePokemonListResult {
   pokemonList: Pokemon[];
+  total: number;
   isLoading: boolean;
   error: Error | null;
 }
 
-export function usePokemonList(initialLimit = 20): UsePokemonListResult {
+export function usePokemonList(limit = 20, offset = 0): UsePokemonListResult {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -19,10 +21,11 @@ export function usePokemonList(initialLimit = 20): UsePokemonListResult {
     setError(null);
 
     pokemonApi
-      .getPokemonList(initialLimit, 0)
-      .then(response => {
+      .getPokemonList(limit, offset)
+      .then(({ paginatedPokemons, total }) => {
         if (isMounted) {
-          setPokemonList(pokemonApi.transformPokemonData(response, 0));
+          setPokemonList(paginatedPokemons);
+          setTotal(total);
         }
       })
       .catch(err => {
@@ -35,10 +38,11 @@ export function usePokemonList(initialLimit = 20): UsePokemonListResult {
     return () => {
       isMounted = false;
     };
-  }, [initialLimit]);
+  }, [limit, offset]);
 
   return {
     pokemonList,
+    total,
     isLoading,
     error,
   };
