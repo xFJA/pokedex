@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { Pokemon } from '../types/pokemon';
 
 interface PokemonCardProps {
@@ -7,6 +8,7 @@ interface PokemonCardProps {
 
 export function PokemonCard({ pokemon }: PokemonCardProps) {
   const [imageError, setImageError] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageError = () => {
     setImageError(true);
@@ -15,8 +17,17 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
   const formattedId = `#${pokemon.id.toString().padStart(3, '0')}`;
   const capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
+  const handleCardClick = () => {
+    navigate(`/pokemon/${pokemon.id}`);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer">
+    <div
+      className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer"
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+    >
       <div className="p-4 bg-gray-100">
         <img
           src={
