@@ -43,13 +43,17 @@ interface TypePillProps {
   type: string;
 }
 
+import { TYPE_BG_CLASS } from '@/constants/pokemonTypeClasses';
+
 export const TypePill: FC<TypePillProps> = ({ type }) => {
   const normalizedType = type.toLowerCase();
   const Icon = TYPE_ICON[normalizedType];
+  // Default to 500 level if not specified
+  const bgClass = TYPE_BG_CLASS[normalizedType]?.[500] ?? 'bg-gray-500';
 
   return (
     <div
-      className={`inline-flex items-center px-2 py-1 rounded-full text-white text-xs font-medium bg-type-${normalizedType}-500`}
+      className={`inline-flex items-center px-2 py-1 rounded-full text-white text-xs font-medium ${bgClass}`}
     >
       {Icon && <Icon className="w-4 h-4 mr-1" />}
       <span className="capitalize">{normalizedType}</span>
