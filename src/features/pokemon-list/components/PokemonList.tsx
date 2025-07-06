@@ -17,8 +17,8 @@ export function PokemonList({ pokemonList, isLoading }: PokemonListProps) {
   }
 
   return (
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div className="w-full">
+      <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(182px,220px))]">
         {pokemonList.map(pokemon => {
           return <PokemonCard key={pokemon.name} pokemon={pokemon} />;
         })}
