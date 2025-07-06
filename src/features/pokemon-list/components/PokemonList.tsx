@@ -1,4 +1,4 @@
-import { PokemonCard } from '../../../components/PokemonCard';
+import { PokemonCard } from '@/components/PokemonCard';
 import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
 
 interface PokemonListProps {
@@ -17,7 +17,7 @@ export function PokemonList({ pokemonList, isLoading }: PokemonListProps) {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {pokemonList.map(pokemon => {
           return <PokemonCard key={pokemon.name} pokemon={pokemon} />;

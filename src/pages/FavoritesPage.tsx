@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { PokemonCard } from '@/components/PokemonCard';
 import { useFavoritePokemon } from '@features/favorites/hooks/useFavoritePokemon';
+import { PokemonCard } from '@/components/PokemonCard';
 
 export function FavoritesPage() {
   const { favoritesList, isLoading, isError } = useFavoritePokemon();
