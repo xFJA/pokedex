@@ -1,6 +1,8 @@
 import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { routes } from '@routes/index';
 import { Layout } from '@components/Layout';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { PokemonErrorFallback } from '@/components/PokemonErrorFallback';
 import './App.css';
 
 function AppRoutes() {
@@ -9,11 +11,13 @@ function AppRoutes() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <AppRoutes />
-      </Layout>
-    </BrowserRouter>
+    <ErrorBoundary fallback={<PokemonErrorFallback />}>
+      <BrowserRouter>
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
