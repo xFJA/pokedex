@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PokemonCard } from '@features/pokemon-list/components/PokemonCard';
+import { PokemonCard } from '@/components/PokemonCard';
 import { useFavoritePokemon } from '@features/favorites/hooks/useFavoritePokemon';
 
 export function FavoritesPage() {

@@ -1,4 +1,4 @@
-import { PokemonCard } from './PokemonCard';
+import { PokemonCard } from '../../../components/PokemonCard';
 import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
 
 interface PokemonListProps {

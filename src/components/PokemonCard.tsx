@@ -35,7 +35,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
 
   return (
     <div
-      className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer group relative"
+      className="bg-white rounded-lg shadow-md border-red-500 border-1 overflow-hidden transition-transform hover:scale-105 cursor-pointer group relative"
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
@@ -52,6 +52,11 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
           className={`w-6 h-6 ${isFavorite(pokemon.id) ? 'text-red-500' : 'text-gray-400 hover:text-red-500'}`}
         />
       </button>
+
+      <span className="absolute -top-0.5 -left-0.5 z-10 text-white font-bold text-lg bg-red-500 px-2 rounded-tl-lg rounded-br-lg">
+        {formattedId}
+      </span>
+
       <div className="p-4 bg-gray-100">
         <img
           src={
@@ -60,14 +65,13 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
               : image
           }
           alt={name}
-          className="w-full h-40 object-contain mx-auto"
+          className="w-full h-32 object-contain mx-auto"
           onError={handleImageError}
           loading="lazy"
         />
       </div>
-      <div className="p-4">
-        <span className="text-gray-500 text-sm">{formattedId}</span>
-        <h3 className="text-lg font-semibold mt-1">{capitalizedName}</h3>
+      <div className="p-3 flex flex-col gap-2 items-center">
+        <h3 className="text-lg text-black font-semibold mt-1">{capitalizedName}</h3>
         {types && types.length > 0 && (
           <div className="flex gap-2 mt-2">
             {types.map(typeInfo => (
