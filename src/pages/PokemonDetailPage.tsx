@@ -3,6 +3,7 @@ import { usePokemonDetails } from '@features/pokemon-details/hooks/usePokemonDet
 import { Stats } from '@features/pokemon-details/components/Stats';
 import { TypePill } from '@components/TypePill';
 import { MovesList } from '@features/pokemon-details/components/MovesList';
+import BackIcon from '@assets/icons/back.svg?react';
 
 export function PokemonDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -16,9 +17,9 @@ export function PokemonDetailPage() {
           <p className="text-gray-700 mb-4">{error.message}</p>
           <Link
             to="/pokemon"
-            className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+            className="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
           >
-            Back to Pokémon List
+            BACK
           </Link>
         </div>
       </div>
@@ -40,38 +41,46 @@ export function PokemonDetailPage() {
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="container mx-auto">
         <div className="mb-6">
-          <Link
-            to="/pokemon"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800"
-          >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              ></path>
-            </svg>
-            Back to Pokémon List
+          <Link to="/pokemon" className="inline-flex items-center text-red-600 hover:text-red-800">
+            <BackIcon />
+            BACK
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md">
-          <div className="md:flex">
-            <div className="md:w-1/3 bg-gray-50 p-6 flex items-center justify-center">
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                alt={pokemon.name}
-                className="w-full max-w-xs"
-              />
+        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="flex flex-col">
+            <div
+              className="p-8 flex items-center justify-center relative z-10 min-h-[300px] rounded-t-lg overflow-hidden"
+              style={{
+                background:
+                  pokemon.types.length > 1
+                    ? `linear-gradient(135deg, var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-500) 0%, var(--color-type-${pokemon.types[1].type.name.toLowerCase()}-500) 100%)`
+                    : `var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-500)`,
+                boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              {/* Decorative circles */}
+              <div className="absolute top-0 left-0 w-32 h-32 rounded-full bg-white opacity-10 -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-white opacity-10 translate-x-1/4 translate-y-1/4"></div>
+              {/* Pokémon image with drop shadow effect */}
+              <div className="relative z-20">
+                <div
+                  className="absolute -inset-1 blur-lg opacity-30"
+                  style={{
+                    background:
+                      pokemon.types.length > 1
+                        ? `radial-gradient(circle, var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-300), var(--color-type-${pokemon.types[1].type.name.toLowerCase()}-300))`
+                        : `var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-300)`,
+                  }}
+                />
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+                  alt={pokemon.name}
+                  className="w-64 mx-auto drop-shadow-2xl relative z-30 transform transition-transform duration-300 hover:scale-105"
+                />
+              </div>
             </div>
-            <div className="md:w-2/3 p-6">
+            <div className="p-6">
               <div className="flex justify-between items-center mb-4">
                 <h1 className="text-3xl font-bold capitalize">{pokemon.name}</h1>
                 <span className="text-2xl font-bold text-gray-500">
@@ -80,7 +89,7 @@ export function PokemonDetailPage() {
               </div>
 
               <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">Types</h2>
+                <h2 className="text-xl text-black font-semibold mb-2">Types</h2>
                 <div className="flex gap-2">
                   {pokemon.types.map(typeInfo => (
                     <TypePill key={typeInfo.type.name} type={typeInfo.type.name} />

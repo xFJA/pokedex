@@ -13,9 +13,9 @@ export const MovesList: React.FC<MovesListProps> = ({ moves }) => {
   }
 
   return (
-    <div className="mt-6">
+    <div className="w-full">
       <h2 className="text-xl font-semibold mb-4 text-black">Moves</h2>
-      <div className="flex p-3 flex-wrap gap-2 max-h-60 overflow-y-auto">
+      <div className="flex p-3 flex-wrap gap-2">
         {moves.map((moveInfo: PokemonMove) => {
           const formattedName = moveInfo.move.name
             .split('-')
