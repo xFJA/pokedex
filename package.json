@@ -19,6 +19,7 @@
     "@tanstack/react-query": "^5.81.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^7.6.3",
     "zod": "^3.25.74",
     "zustand": "^5.0.6"

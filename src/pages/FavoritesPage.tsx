@@ -1,20 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useFavoritePokemon } from '@features/favorites/hooks/useFavoritePokemon';
 import { PokemonCard } from '@/components/PokemonCard';
+import { PokemonCardSkeleton } from '@/components/PokemonCardSkeleton';
 
 export function FavoritesPage() {
   const { favoritesList, isLoading, isError } = useFavoritePokemon();
-
-  if (isLoading) {
-    return (
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-6">My Favorites</h1>
-        <div className="flex justify-center items-center h-64">
-          <p className="text-gray-500">Loading favorites...</p>
-        </div>
-      </div>
-    );
-  }
 
   if (isError) {
     return (
@@ -27,7 +17,7 @@ export function FavoritesPage() {
     );
   }
 
-  if (favoritesList.length === 0) {
+  if (favoritesList.length === 0 && !isLoading) {
     return (
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-6">My Favorites</h1>
@@ -63,10 +53,12 @@ export function FavoritesPage() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-black mb-6">My Favorites</h1>
-      <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(182px,220px))]">
-        {favoritesList.map(pokemon => (
-          <PokemonCard key={pokemon.name} pokemon={pokemon} />
-        ))}
+      <div className="grid gap-6 grid-cols-[repeat(auto-fit,220px)]">
+        {isLoading
+          ? Array.from({ length: 20 }).map((_, idx) => (
+              <PokemonCardSkeleton key={`fav-skeleton-${idx}`} />
+            ))
+          : favoritesList.map(pokemon => <PokemonCard key={pokemon.name} pokemon={pokemon} />)}
       </div>
     </div>
   );

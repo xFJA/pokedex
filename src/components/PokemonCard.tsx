@@ -3,6 +3,7 @@ import { formatPokemonId } from '@/utils/format';
 import { useNavigate } from 'react-router-dom';
 import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
 import { TypePill } from '@components/TypePill';
+import Skeleton from 'react-loading-skeleton';
 import { useFavoritesStore } from '@/store/favourites';
 import Favourite from '@/assets/icons/favourite.svg?react';
 
@@ -36,7 +37,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
 
   return (
     <div
-      className="bg-white rounded-lg shadow-md border-red-500 border-1 overflow-hidden transition-transform hover:scale-105 cursor-pointer group relative"
+      className="bg-white h-[300px] w-[220px] flex flex-col rounded-lg shadow-md border-red-500 border-1 overflow-hidden transition-transform hover:scale-105 cursor-pointer group relative"
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
@@ -68,16 +69,20 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
           alt={name}
           className="w-full h-32 object-contain mx-auto"
           onError={handleImageError}
-          loading="lazy"
         />
       </div>
-      <div className="p-3 flex flex-col gap-2 items-center">
+      <div className="p-3 flex flex-col gap-2 items-center justify-between flex-grow">
         <h3 className="text-lg text-black font-semibold mt-1">{capitalizedName}</h3>
-        {types && types.length > 0 && (
+        {types && types.length > 0 ? (
           <div className="flex gap-2 mt-2">
             {types.map(typeInfo => (
               <TypePill key={typeInfo.type.name} type={typeInfo.type.name} />
             ))}
+          </div>
+        ) : (
+          <div className="flex gap-2 mt-2">
+            <Skeleton height={24} width={70} borderRadius={8} />
+            <Skeleton height={24} width={70} borderRadius={8} />
           </div>
         )}
       </div>

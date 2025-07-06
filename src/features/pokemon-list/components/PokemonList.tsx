@@ -1,4 +1,5 @@
 import { PokemonCard } from '@/components/PokemonCard';
+import { PokemonCardSkeleton } from '@/components/PokemonCardSkeleton';
 import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
 
 interface PokemonListProps {
@@ -16,19 +17,17 @@ export function PokemonList({ pokemonList, isLoading }: PokemonListProps) {
     );
   }
 
+  const skeletonCards = Array.from({ length: 20 }, (_, index) => (
+    <PokemonCardSkeleton key={`skeleton-${index}`} />
+  ));
+
   return (
     <div className="w-full">
-      <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(182px,220px))]">
-        {pokemonList.map(pokemon => {
-          return <PokemonCard key={pokemon.name} pokemon={pokemon} />;
-        })}
+      <div className="grid gap-6 grid-cols-[repeat(auto-fit,220px)] justify-center md:justify-start">
+        {isLoading
+          ? skeletonCards
+          : pokemonList.map(pokemon => <PokemonCard key={pokemon.name} pokemon={pokemon} />)}
       </div>
-
-      {isLoading && (
-        <div className="flex justify-center my-8">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-        </div>
-      )}
     </div>
   );
 }
