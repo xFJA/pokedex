@@ -62,7 +62,7 @@ export function PokemonDetailPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white rounded-lg shadow-md">
           <div className="md:flex">
             <div className="md:w-1/3 bg-gray-50 p-6 flex items-center justify-center">
               <img
@@ -87,8 +87,8 @@ export function PokemonDetailPage() {
                   ))}
                 </div>
               </div>
-              <MovesList moves={pokemon.moves} />
               <Stats pokemon={pokemon} />
+              <MovesList moves={pokemon.moves} />
             </div>
           </div>
         </div>

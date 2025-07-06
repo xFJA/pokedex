@@ -18,28 +18,26 @@ import RockIcon from '@assets/icons/rock.svg?react';
 import SteelIcon from '@assets/icons/steel.svg?react';
 import WaterIcon from '@assets/icons/water.svg?react';
 
-const TYPE_CONFIG: Record<string, { color: string; icon: FC<{ className?: string }> }> = {
-  normal: { color: '#A8A77A', icon: NormalIcon },
-  fire: { color: '#EE8130', icon: FireIcon },
-  water: { color: '#6390F0', icon: WaterIcon },
-  electric: { color: '#F7D02C', icon: ElectricIcon },
-  grass: { color: '#7AC74C', icon: GrassIcon },
-  ice: { color: '#96D9D6', icon: IceIcon },
-  fighting: { color: '#C22E28', icon: FightingIcon },
-  poison: { color: '#A33EA1', icon: PoisonIcon },
-  ground: { color: '#E2BF65', icon: GroundIcon },
-  flying: { color: '#A98FF3', icon: FlyingIcon },
-  psychic: { color: '#F95587', icon: PsychicIcon },
-  bug: { color: '#A6B91A', icon: BugIcon },
-  rock: { color: '#B6A136', icon: RockIcon },
-  ghost: { color: '#735797', icon: GhostIcon },
-  dragon: { color: '#6F35FC', icon: DragonIcon },
-  dark: { color: '#705746', icon: DarkIcon },
-  steel: { color: '#B7B7CE', icon: SteelIcon },
-  fairy: { color: '#D685AD', icon: FairyIcon },
+const TYPE_ICON: Record<string, FC<React.SVGProps<SVGSVGElement>>> = {
+  normal: NormalIcon,
+  fire: FireIcon,
+  water: WaterIcon,
+  electric: ElectricIcon,
+  grass: GrassIcon,
+  ice: IceIcon,
+  fighting: FightingIcon,
+  poison: PoisonIcon,
+  ground: GroundIcon,
+  flying: FlyingIcon,
+  psychic: PsychicIcon,
+  bug: BugIcon,
+  rock: RockIcon,
+  ghost: GhostIcon,
+  dragon: DragonIcon,
+  dark: DarkIcon,
+  steel: SteelIcon,
+  fairy: FairyIcon,
 };
-
-export const POKEMON_TYPES = Object.keys(TYPE_CONFIG);
 
 interface TypePillProps {
   type: string;
@@ -47,16 +45,13 @@ interface TypePillProps {
 
 export const TypePill: FC<TypePillProps> = ({ type }) => {
   const normalizedType = type.toLowerCase();
-  const typeInfo = TYPE_CONFIG[normalizedType];
-  const backgroundColor = typeInfo?.color || '#777777';
-  const IconComponent = typeInfo?.icon ? <typeInfo.icon className="w-4 h-4 mr-1" /> : null;
+  const Icon = TYPE_ICON[normalizedType];
 
   return (
     <div
-      className={`inline-flex items-center px-2 py-1 rounded-full text-white text-xs font-medium`}
-      style={{ backgroundColor }}
+      className={`inline-flex items-center px-2 py-1 rounded-full text-white text-xs font-medium bg-type-${normalizedType}-500`}
     >
-      {IconComponent}
+      {Icon && <Icon className="w-4 h-4 mr-1" />}
       <span className="capitalize">{normalizedType}</span>
     </div>
   );
