@@ -4,10 +4,13 @@ import { Stats } from '@features/pokemon-details/components/Stats';
 import { TypePill } from '@components/TypePill';
 import { MovesList } from '@features/pokemon-details/components/MovesList';
 import BackIcon from '@assets/icons/back.svg?react';
+import { formatPokemonId } from '@/utils/format';
+import { TYPE_BG_CLASS, TYPE_TEXT_CLASS } from '@/constants/pokemonTypeClasses';
 
 export function PokemonDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { pokemon, isLoading, error } = usePokemonDetails(id ?? '');
+  const formattedId = formatPokemonId(pokemon?.id ?? 0);
 
   if (error) {
     return (
@@ -59,10 +62,9 @@ export function PokemonDetailPage() {
                 boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.1)',
               }}
             >
-              {/* Decorative circles */}
               <div className="absolute top-0 left-0 w-32 h-32 rounded-full bg-white opacity-10 -translate-x-1/2 -translate-y-1/2"></div>
               <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-white opacity-10 translate-x-1/4 translate-y-1/4"></div>
-              {/* Pokémon image with drop shadow effect */}
+
               <div className="relative z-20">
                 <div
                   className="absolute -inset-1 blur-lg opacity-30"
@@ -79,13 +81,22 @@ export function PokemonDetailPage() {
                   className="w-64 mx-auto drop-shadow-2xl relative z-30 transform transition-transform duration-300 hover:scale-105"
                 />
               </div>
+              {(() => {
+                const firstType = pokemon.types[0].type.name.toLowerCase();
+                const bgClass = TYPE_BG_CLASS[firstType]?.[100] ?? 'bg-gray-500';
+                const textClass = TYPE_TEXT_CLASS[firstType]?.[700] ?? 'text-white';
+                return (
+                  <span
+                    className={`absolute -top-0.5 -left-0.5 z-10 font-bold text-4xl px-3 py-1 rounded-tl-lg rounded-br-2xl ${bgClass} ${textClass}`}
+                  >
+                    {formattedId}
+                  </span>
+                );
+              })()}
             </div>
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
                 <h1 className="text-3xl font-bold capitalize">{pokemon.name}</h1>
-                <span className="text-2xl font-bold text-gray-500">
-                  #{pokemon.id.toString().padStart(3, '0')}
-                </span>
               </div>
 
               <div className="mb-6">

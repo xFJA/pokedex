@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { formatPokemonId } from '@/utils/format';
 import { useNavigate } from 'react-router-dom';
 import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
 import { TypePill } from '@components/TypePill';
@@ -20,7 +21,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
     setImageError(true);
   };
 
-  const formattedId = `#${id.toString().padStart(3, '0')}`;
+  const formattedId = formatPokemonId(id);
   const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
 
   const handleCardClick = () => {
