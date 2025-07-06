@@ -23,7 +23,7 @@ export function PokemonListPage() {
   const handlePageChange = (page: number) => setCurrentPage(page);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6 items-center">
       {error && (
         <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
           <p>Error loading Pokémon: {error.message}</p>
@@ -32,13 +32,14 @@ export function PokemonListPage() {
           </button>
         </div>
       )}
-
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        siblingCount={SIBLING_COUNT}
-      />
+      <div className="p-3 bg-gray-200 rounded-lg w-fit">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          siblingCount={SIBLING_COUNT}
+        />
+      </div>
 
       <PokemonList pokemonList={pokemonList} isLoading={isLoading} />
     </div>

@@ -1,5 +1,9 @@
 import { useMemo } from 'react';
 import { PaginationButton } from './PaginationButton';
+import ChevronDoubleLeftIcon from '@assets/icons/chevron-double-left.svg?react';
+import ChevronDoubleRightIcon from '@assets/icons/chevron-double-right.svg?react';
+import ChevronLeftIcon from '@assets/icons/chevron-left.svg?react';
+import ChevronRightIcon from '@assets/icons/chevron-right.svg?react';
 
 interface PaginationProps {
   currentPage: number;
@@ -101,51 +105,24 @@ function Pagination({
       className={`flex items-center justify-center space-x-1 ${className}`}
       aria-label="Pagination"
     >
-      {/* First page button */}
       <PaginationButton
         onClick={goToFirstPage}
         disabled={!canGoToPreviousPage}
         ariaLabel="Go to first page"
       >
         <span className="sr-only">First</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            fillRule="evenodd"
-            d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <ChevronDoubleLeftIcon className="h-6 w-6" />
       </PaginationButton>
 
-      {/* Previous page button */}
       <PaginationButton
         onClick={goToPreviousPage}
         disabled={!canGoToPreviousPage}
         ariaLabel="Go to previous page"
       >
         <span className="sr-only">Previous</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            fillRule="evenodd"
-            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <ChevronLeftIcon className="h-6 w-6" />
       </PaginationButton>
 
-      {/* Page numbers */}
       <div className="hidden sm:flex space-x-1">
         {pageNumbers.map((pageNumber, index) =>
           pageNumber === 'dots' ? (
@@ -170,53 +147,26 @@ function Pagination({
         )}
       </div>
 
-      {/* Current page indicator for mobile */}
       <span className="sm:hidden text-sm text-gray-700">
         Page {currentPage} of {totalPages}
       </span>
 
-      {/* Next page button */}
       <PaginationButton
         onClick={goToNextPage}
         disabled={!canGoToNextPage}
         ariaLabel="Go to next page"
       >
         <span className="sr-only">Next</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            fillRule="evenodd"
-            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <ChevronRightIcon className="h-6 w-6" />
       </PaginationButton>
 
-      {/* Last page button */}
       <PaginationButton
         onClick={goToLastPage}
         disabled={!canGoToNextPage}
         ariaLabel="Go to last page"
       >
         <span className="sr-only">Last</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            fillRule="evenodd"
-            d="M4.293 15.707a1 1 0 001.414 0l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L8.586 10 4.293 14.293a1 1 0 000 1.414zm6 0a1 1 0 001.414 0l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L15.586 10l-4.293 4.293a1 1 0 000 1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <ChevronDoubleRightIcon className="h-6 w-6" />
       </PaginationButton>
     </nav>
   );
