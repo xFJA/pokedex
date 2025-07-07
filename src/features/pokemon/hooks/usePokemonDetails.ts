@@ -14,6 +14,7 @@ export function usePokemonDetails(id: string | number): UsePokemonDetailsResult 
     queryKey: queryKeys.pokemonDetails(id),
     queryFn: () => pokemonApi.getPokemonById(id),
     enabled: !!id,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

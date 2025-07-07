@@ -20,6 +20,8 @@ export function useFavoritePokemon(): UseFavoritePokemonResult {
       queryKey: queryKeys.pokemonDetails(id),
       queryFn: () => pokemonApi.getPokemonById(id),
       enabled: favoriteIds.length > 0,
+      staleTime: 10 * 60 * 1000,
+      cacheTime: 30 * 60 * 1000,
     })),
   });
 

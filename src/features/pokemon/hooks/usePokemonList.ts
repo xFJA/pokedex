@@ -1,5 +1,4 @@
-import { useQuery, useQueries } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useQuery, useQueries, keepPreviousData } from '@tanstack/react-query';
 import type { Pokemon } from '@/features/pokemon/types/pokemon';
 import { pokemonApi } from '@/features/pokemon/api/pokemonApi';
 import { queryKeys } from '@/queryKeys';
@@ -24,27 +23,28 @@ export function usePokemonList(limit = 20, offset = 0): UsePokemonListResult {
   const { data, isLoading, error } = useQuery({
     queryKey: queryKeys.pokemonList(limit, offset),
     queryFn: () => pokemonApi.getPokemonList(limit, offset),
+    staleTime: 5 * 60 * 1000,
+    placeholderData: keepPreviousData,
   });
 
-  const pokemonList = useMemo(() => data?.paginatedPokemons ?? [], [data?.paginatedPokemons]);
+  const pokemonList = data?.paginatedPokemons ?? [];
 
   const detailQueries = useQueries({
     queries: pokemonList.map(pokemon => ({
       queryKey: queryKeys.pokemonDetails(pokemon.id),
       queryFn: () => pokemonApi.getPokemonById(pokemon.id),
+      staleTime: 10 * 60 * 1000,
       enabled: !isLoading && pokemonList.length > 0,
     })),
   });
 
-  const enrichedList = useMemo(() => {
-    if (pokemonList.length === 0) {
-      return [];
-    }
-    return pokemonList.map((pokemon, index) => {
-      const details = detailQueries[index].data;
-      return { ...pokemon, types: details?.types ?? [] };
-    });
-  }, [pokemonList, detailQueries]);
+  const enrichedList =
+    pokemonList.length === 0
+      ? []
+      : pokemonList.map((pokemon, index) => {
+          const details = detailQueries[index].data;
+          return { ...pokemon, types: details?.types ?? [] };
+        });
 
   return {
     pokemonList: enrichedList,
