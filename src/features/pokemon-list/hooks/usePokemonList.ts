@@ -9,7 +9,6 @@ export interface PokemonWithTypes extends Pokemon {
     slot: number;
     type: {
       name: string;
-      url: string;
     };
   }[];
 }

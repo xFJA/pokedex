@@ -3,8 +3,8 @@ import { z } from 'zod';
 export const PokemonSchema = z.object({
   id: z.number(),
   name: z.string(),
-  url: z.string().url(),
   image: z.string(),
+  url: z.string().url(),
 });
 export type Pokemon = z.infer<typeof PokemonSchema>;
 
@@ -15,7 +15,7 @@ export const PokemonListResponseSchema = z.object({
   results: z.array(
     z.object({
       name: z.string(),
-      url: z.string().url(),
+      image: z.string(),
     }),
   ),
 });
