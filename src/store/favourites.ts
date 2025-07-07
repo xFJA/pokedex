@@ -1,4 +1,4 @@
-import type { Pokemon } from '@/features/pokemon-list/types/pokemon';
+import type { Pokemon } from '@/features/pokemon/types/pokemon';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

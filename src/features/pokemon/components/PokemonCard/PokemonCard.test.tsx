@@ -1,7 +1,8 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { PokemonCard } from './PokemonCard';
+
 import { MemoryRouter } from 'react-router-dom';
+import PokemonCard from '.';
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
@@ -28,10 +29,6 @@ vi.mock('@/assets/icons/favourite.svg?react', () => ({
       <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
     </svg>
   ),
-}));
-
-vi.mock('@components/TypePill', () => ({
-  TypePill: ({ type }: { type: string }) => <span data-testid={`type-pill-${type}`}>{type}</span>,
 }));
 
 vi.mock('react-loading-skeleton', () => ({
@@ -73,7 +70,6 @@ describe('<PokemonCard />', () => {
     expect(screen.getByText('Pikachu')).not.toBeNull();
     const image = screen.getByAltText('pikachu') as HTMLImageElement;
     expect(image.getAttribute('src')).toBe(mockPokemon.image);
-    expect(screen.getByTestId('type-pill-electric')).not.toBeNull();
   });
 
   it('navigates to pokemon detail page when clicked', () => {

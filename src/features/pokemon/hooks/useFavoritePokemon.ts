@@ -1,9 +1,9 @@
 import { useQueries } from '@tanstack/react-query';
 import { useFavoritesStore } from '@/store/favourites';
-import { pokemonApi } from '@api/pokemonApi';
+import { pokemonApi } from '@/features/pokemon/api/pokemonApi';
 import { queryKeys } from '@/queryKeys';
-import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
-import type { PokemonDetails } from '@/types/pokemonDetails';
+import type { PokemonWithTypes } from '@/features/pokemon/hooks/usePokemonList';
+import type { PokemonDetails } from '@/features/pokemon/types/pokemon-details';
 
 interface UseFavoritePokemonResult {
   favoritesList: PokemonWithTypes[];

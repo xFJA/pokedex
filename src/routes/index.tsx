@@ -1,8 +1,8 @@
 import type { RouteObject } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { PokemonListPage } from '@pages/PokemonListPage';
-import { PokemonDetailPage } from '@pages/PokemonDetailPage';
-import { FavoritesPage } from '@pages/FavoritesPage';
+import { PokemonListPage } from '@/features/pokemon/pages/PokemonListPage';
+import { PokemonDetailPage } from '@/features/pokemon/pages/PokemonDetailPage';
+import { FavoritesPage } from '@/features/pokemon/pages/FavoritesPage';
 
 export const routes: RouteObject[] = [
   {

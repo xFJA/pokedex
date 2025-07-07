@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PokemonDetails } from '@/types/pokemonDetails';
+import type { PokemonDetails } from '@/features/pokemon/types/pokemon-details';
 
 type PokemonMove = PokemonDetails['moves'][number];
 

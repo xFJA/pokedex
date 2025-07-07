@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { PokemonList } from '@features/pokemon-list/components/PokemonList';
-import { usePokemonList } from '@features/pokemon-list/hooks/usePokemonList';
+import { PokemonList } from '@/features/pokemon/components/PokemonList';
+import { usePokemonList } from '@/features/pokemon/hooks/usePokemonList';
 import { usePagination } from '@hooks/usePagination';
 import Pagination from '@components/Pagination';
 

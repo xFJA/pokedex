@@ -1,12 +1,12 @@
 import type { FC } from 'react';
-import type { PokemonDetails } from '@/types/pokemonDetails';
+import type { PokemonDetails } from '@/features/pokemon/types/pokemon-details';
 import { StatBar } from './StatBar';
 
 interface StatsProps {
   pokemon: PokemonDetails;
 }
 
-export const Stats: FC<StatsProps> = ({ pokemon }) => {
+const Stats: FC<StatsProps> = ({ pokemon }) => {
   if (!pokemon.stats || pokemon.stats.length === 0) {
     return <div className="text-gray-500">No stats available</div>;
   }
@@ -27,3 +27,5 @@ export const Stats: FC<StatsProps> = ({ pokemon }) => {
     </div>
   );
 };
+
+export default Stats;

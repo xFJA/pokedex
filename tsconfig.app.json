@@ -29,7 +29,7 @@
       "@config/*": ["./src/config/*"],
       "@assets/*": ["./src/assets/*"],
       "@types/*": ["./src/types/*"],
-      "@pages/*": ["./src/pages/*"],
+      "@pages/*": ["src/features/pokemon/pages/*"],
       "@routes/*": ["./src/routes/*"]
     },
 

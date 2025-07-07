@@ -1,12 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
 import PokeballSpinner from '@/assets/icons/PokeballSpinner.svg?react';
-import { usePokemonDetails } from '@features/pokemon-details/hooks/usePokemonDetails';
-import { Stats } from '@features/pokemon-details/components/Stats';
-import { TypePill } from '@components/TypePill';
-import { MovesList } from '@features/pokemon-details/components/MovesList';
+import { usePokemonDetails } from '@/features/pokemon/hooks/usePokemonDetails';
+import { TypePill } from '@/features/pokemon/components/TypePill';
+import { MovesList } from '@/features/pokemon/components/MovesList';
 import BackIcon from '@assets/icons/back.svg?react';
 import { formatPokemonId } from '@/utils/format';
 import { TYPE_BG_CLASS, TYPE_TEXT_CLASS } from '@/constants/pokemonTypeClasses';
+import Stats from '../components/Stats';
 
 export function PokemonDetailPage() {
   const { id } = useParams<{ id: string }>();

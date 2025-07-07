@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { formatPokemonId } from '@/utils/format';
 import { useNavigate } from 'react-router-dom';
-import type { PokemonWithTypes } from '@features/pokemon-list/hooks/usePokemonList';
-import { TypePill } from '@components/TypePill';
+import type { PokemonWithTypes } from '@/features/pokemon/hooks/usePokemonList';
+import { TypePill } from '@/features/pokemon/components/TypePill';
 import Skeleton from 'react-loading-skeleton';
 import { useFavoritesStore } from '@/store/favourites';
 import Favourite from '@/assets/icons/favourite.svg?react';
@@ -11,7 +11,7 @@ interface PokemonCardProps {
   pokemon: PokemonWithTypes;
 }
 
-export function PokemonCard({ pokemon }: PokemonCardProps) {
+function PokemonCard({ pokemon }: PokemonCardProps) {
   const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavoritesStore();
@@ -89,3 +89,5 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
     </div>
   );
 }
+
+export default PokemonCard;

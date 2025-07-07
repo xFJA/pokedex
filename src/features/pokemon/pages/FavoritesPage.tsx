@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useFavoritePokemon } from '@features/favorites/hooks/useFavoritePokemon';
-import { PokemonCard } from '@/components/PokemonCard';
-import { PokemonCardSkeleton } from '@/components/PokemonCardSkeleton';
+import { useFavoritePokemon } from '@/features/pokemon/hooks/useFavoritePokemon';
+import PokemonCard from '@/features/pokemon/components/PokemonCard';
+import { PokemonCardSkeleton } from '@/features/pokemon/components/PokemonCard/PokemonCardSkeleton';
 import PokeballSpinner from '@/assets/icons/PokeballSpinner.svg?react';
 
 export function FavoritesPage() {

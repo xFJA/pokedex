@@ -15,7 +15,7 @@ export const PokemonListResponseSchema = z.object({
   results: z.array(
     z.object({
       name: z.string(),
-      image: z.string(),
+      url: z.string().url(),
     }),
   ),
 });

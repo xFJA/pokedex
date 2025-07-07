@@ -1,8 +1,8 @@
 import { apiClient } from '@api/apiClient';
-import { PokemonDetailsSchema } from '@/types/pokemonDetails';
-import { PokemonListResponseSchema, PokemonSchema } from '@/features/pokemon-list/types/pokemon';
-import type { Pokemon } from '@/features/pokemon-list/types/pokemon';
-import type { PokemonDetails } from '@/types/pokemonDetails';
+import { PokemonDetailsSchema } from '@/features/pokemon/types/pokemon-details';
+import { PokemonListResponseSchema, PokemonSchema } from '@/features/pokemon/types/pokemon';
+import type { Pokemon } from '@/features/pokemon/types/pokemon';
+import type { PokemonDetails } from '@/features/pokemon/types/pokemon-details';
 
 export class PokemonApiService {
   private client;

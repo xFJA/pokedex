@@ -11,7 +11,6 @@ export const PokemonTypeSchema = z.object({
   slot: z.number(),
   type: z.object({
     name: z.string(),
-    url: z.string().url(),
   }),
 });
 
