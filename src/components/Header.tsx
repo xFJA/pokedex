@@ -6,12 +6,14 @@ export function Header() {
   return (
     <header className="bg-red-600 text-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between gap-6">
-        <img
-          src={pokedexLogo}
-          alt="Pokédex Logo"
-          className="h-10 w-auto select-none"
-          draggable="false"
-        />
+        <NavLink to="/" className="focus:outline-none">
+          <img
+            src={pokedexLogo}
+            alt="Pokédex Logo"
+            className="h-10 w-auto select-none cursor-pointer"
+            draggable="false"
+          />
+        </NavLink>
         <nav className="flex space-x-6">
           <NavLink
             to="/pokemon"
