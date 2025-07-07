@@ -13,25 +13,22 @@ export const MovesList: React.FC<MovesListProps> = ({ moves }) => {
   }
 
   return (
-    <div className="w-full">
-      <h2 className="text-xl font-semibold mb-4 text-black">Moves</h2>
-      <div className="flex p-3 flex-wrap gap-2">
-        {moves.map((moveInfo: PokemonMove) => {
-          const formattedName = moveInfo.move.name
-            .split('-')
-            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
+    <div className="flex flex-wrap gap-2">
+      {moves.map((moveInfo: PokemonMove) => {
+        const formattedName = moveInfo.move.name
+          .split('-')
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
 
-          return (
-            <div
-              key={moveInfo.move.name}
-              className="bg-white rounded-full px-4 py-2 text-black text-sm border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
-            >
-              {formattedName}
-            </div>
-          );
-        })}
-      </div>
+        return (
+          <div
+            key={moveInfo.move.name}
+            className="bg-white rounded-full px-4 py-2 text-black text-sm border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
+          >
+            {formattedName}
+          </div>
+        );
+      })}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import PokeballSpinner from '@/assets/icons/PokeballSpinner.svg?react';
 import { usePokemonDetails } from '@features/pokemon-details/hooks/usePokemonDetails';
 import { Stats } from '@features/pokemon-details/components/Stats';
 import { TypePill } from '@components/TypePill';
@@ -11,6 +12,7 @@ export function PokemonDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { pokemon, isLoading, error } = usePokemonDetails(id ?? '');
   const formattedId = formatPokemonId(pokemon?.id ?? 0);
+  const firstType = pokemon?.types[0].type.name.toLowerCase() ?? '';
 
   if (error) {
     return (
@@ -33,8 +35,7 @@ export function PokemonDetailPage() {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
-          <p className="mt-4 text-xl text-gray-700">Loading Pokémon details...</p>
+          <PokeballSpinner className="animate-spin mx-auto" width={64} height={64} />
         </div>
       </div>
     );
@@ -53,36 +54,38 @@ export function PokemonDetailPage() {
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="flex flex-col">
             <div
-              className="p-8 flex items-center justify-center relative z-10 min-h-[300px] rounded-t-lg overflow-hidden"
+              className="p-8 flex items-center justify-center relative z-10 min-h-[300px] rounded-t-lg rounded-b-4xl overflow-hidden"
               style={{
                 background:
                   pokemon.types.length > 1
-                    ? `linear-gradient(135deg, var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-500) 0%, var(--color-type-${pokemon.types[1].type.name.toLowerCase()}-500) 100%)`
-                    : `var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-500)`,
+                    ? `linear-gradient(135deg, var(--color-type-${firstType}-500) 0%, var(--color-type-${pokemon.types[1].type.name.toLowerCase()}-500) 100%)`
+                    : `var(--color-type-${firstType}-500)`,
                 boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.1)',
               }}
             >
               <div className="absolute top-0 left-0 w-32 h-32 rounded-full bg-white opacity-10 -translate-x-1/2 -translate-y-1/2"></div>
               <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-white opacity-10 translate-x-1/4 translate-y-1/4"></div>
 
-              <div className="relative z-20">
-                <div
-                  className="absolute -inset-1 blur-lg opacity-30"
-                  style={{
-                    background:
-                      pokemon.types.length > 1
-                        ? `radial-gradient(circle, var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-300), var(--color-type-${pokemon.types[1].type.name.toLowerCase()}-300))`
-                        : `var(--color-type-${pokemon.types[0].type.name.toLowerCase()}-300)`,
-                  }}
-                />
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                  alt={pokemon.name}
-                  className="w-64 mx-auto drop-shadow-2xl relative z-30 transform transition-transform duration-300 hover:scale-105"
-                />
+              <div className="flex flex-col items-center gap-5">
+                <div className="relative z-20">
+                  <div
+                    className="absolute -inset-1 blur-lg opacity-40 rounded-full"
+                    style={{
+                      background:
+                        pokemon.types.length > 1
+                          ? `radial-gradient(circle, var(--color-type-${firstType}-300), var(--color-type-${pokemon.types[1].type.name.toLowerCase()}-300))`
+                          : `var(--color-type-${firstType}-300)`,
+                    }}
+                  />
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+                    alt={pokemon.name}
+                    className="w-48 mx-auto drop-shadow-2xl relative z-30 transform transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+                <h1 className="text-4xl font-bold capitalize">{pokemon.name}</h1>
               </div>
               {(() => {
-                const firstType = pokemon.types[0].type.name.toLowerCase();
                 const bgClass = TYPE_BG_CLASS[firstType]?.[100] ?? 'bg-gray-500';
                 const textClass = TYPE_TEXT_CLASS[firstType]?.[700] ?? 'text-white';
                 return (
@@ -94,21 +97,23 @@ export function PokemonDetailPage() {
                 );
               })()}
             </div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-bold capitalize">{pokemon.name}</h1>
-              </div>
-
-              <div className="mb-6">
-                <h2 className="text-xl text-black font-semibold mb-2">Types</h2>
+            <div className="p-6 flex flex-col gap-5">
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xl text-black font-semibold">Types</h2>
                 <div className="flex gap-2">
                   {pokemon.types.map(typeInfo => (
                     <TypePill key={typeInfo.type.name} type={typeInfo.type.name} />
                   ))}
                 </div>
               </div>
-              <Stats pokemon={pokemon} />
-              <MovesList moves={pokemon.moves} />
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xl font-semibold text-black">Base Stats</h2>
+                <Stats pokemon={pokemon} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xl font-semibold text-black">Moves</h2>
+                <MovesList moves={pokemon.moves} />
+              </div>
             </div>
           </div>
         </div>

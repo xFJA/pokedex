@@ -12,21 +12,18 @@ export const Stats: FC<StatsProps> = ({ pokemon }) => {
   }
 
   return (
-    <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-4 text-black">Base Stats</h2>
-      <div className="space-y-3">
-        {(() => {
-          const primaryType = pokemon.types[0].type.name;
-          return pokemon.stats.map(stat => (
-            <StatBar
-              key={stat.stat.name}
-              name={stat.stat.name}
-              value={stat.base_stat}
-              type={primaryType}
-            />
-          ));
-        })()}
-      </div>
+    <div className="space-y-3">
+      {(() => {
+        const primaryType = pokemon.types[0].type.name;
+        return pokemon.stats.map(stat => (
+          <StatBar
+            key={stat.stat.name}
+            name={stat.stat.name}
+            value={stat.base_stat}
+            type={primaryType}
+          />
+        ));
+      })()}
     </div>
   );
 };
