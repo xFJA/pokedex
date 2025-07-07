@@ -1,9 +1,17 @@
 import { NavLink } from 'react-router-dom';
 
+import pokedexLogo from '@/assets/images/pokedex-logo.png';
+
 export function Header() {
   return (
     <header className="bg-red-600 text-white shadow-md">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-3 flex justify-between gap-6">
+        <img
+          src={pokedexLogo}
+          alt="Pokédex Logo"
+          className="h-10 w-auto select-none"
+          draggable="false"
+        />
         <nav className="flex space-x-6">
           <NavLink
             to="/pokemon"
